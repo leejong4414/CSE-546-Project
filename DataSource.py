@@ -1,11 +1,11 @@
 import numpy as np
-import sklearn as sl
 import pandas as pd
 import random
 
 def process_data():
     X = np.zeros((1,6))
     Y = np.zeros((1,1))
+    counter = 0
     for chunk_df in pd.read_csv('train.csv', chunksize = 1000):
         
         chunk_ma = chunk_df.as_matrix()
@@ -23,8 +23,8 @@ def process_data():
         
         Y = np.vstack([Y,[0]])
         X = np.vstack([X, chunk_ma[random.randint(temp[1], i)][:6]])
-        
-        break
+        counter = counter + 1
+        print(counter)
     
     df = pd.DataFrame(X[1:])
     df.to_csv("X.csv")
