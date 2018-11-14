@@ -2,9 +2,6 @@ import numpy as np
 from mnist import MNIST
 import matplotlib.pyplot as plt
 
-def load_dataset():
-    # TODO: Load the data
-
 def gradient_descent(X_train, y_train, X_test, y_test, lamda, eta):
     d = X_train.shape[1]
     w = np.zeros(shape=(d, 1))
