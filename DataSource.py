@@ -63,7 +63,7 @@ def run():
         columns = ['app', 'device', 'os', 'channel']
         df.drop(columns, inplace=True, axis=1)
         df.to_csv('output_data.csv')
-
+        
 run()
 
 # df = pd.DataFrame([
