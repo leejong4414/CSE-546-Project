@@ -40,10 +40,8 @@ def partitionData():
         X = np.genfromtxt("output_data.csv", delimiter=",")
         X = X[1:,:] # Excluse first row which is title names
         train_C = int(X.shape[0] * 0.8)
-        test_C = X.shape[0] - train_C
-        print(train_C)
         train = X[:train_C,:]
-        test = X[:test_C,:]
+        test = X[(train_C + 1):,:]
         return train[:,:-1], train[:,-1], test[:, :-1], test[:,-1]
 
 def run():
