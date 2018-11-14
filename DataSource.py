@@ -36,6 +36,16 @@ from sklearn.preprocessing import OneHotEncoder
 # le_make = LabelEncoder()
 # df['color_encoded'] = le_color.fit_transform(df.color)
 # df['make_encoded'] = le_make.fit_transform(df.make)
+def partitionData():
+        X = np.genfromtxt("output_data.csv", delimiter=",")
+        X = X[1:,:] # Excluse first row which is title names
+        train_C = int(X.shape[0] * 0.8)
+        test_C = X.shape[0] - train_C
+        print(train_C)
+        train = X[:train_C,:]
+        test = X[:test_C,:]
+        return train[:,:-1], train[:,-1], test[:, :-1], test[:,-1]
+
 def run():
         df =  pd.read_csv('dataset.csv', delimiter=',')
         app_ohe = OneHotEncoder()
