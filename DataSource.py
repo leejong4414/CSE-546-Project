@@ -37,11 +37,7 @@ from sklearn.preprocessing import OneHotEncoder
 # df['color_encoded'] = le_color.fit_transform(df.color)
 # df['make_encoded'] = le_make.fit_transform(df.make)
 def run():
-    for df in pd.read_csv('dataset.csv', delimiter=',', chunksize=100000000):
-        # print(df.isnull().any())
-        # print("B")
-        # print(df[df.isnull().any(axis=1)])
-        # print("a")
+        df =  pd.read_csv('dataset.csv', delimiter=',')
         app_ohe = OneHotEncoder()
         device_ohe = OneHotEncoder()
         os_ohe = OneHotEncoder()
@@ -63,7 +59,10 @@ def run():
 
         dfOneHot = pd.DataFrame(channel_ohe_X, columns=["channel_" + str(int(i)) for i in range(channel_ohe_X.shape[1])])
         df = pd.concat([df, dfOneHot], axis = 1)
-        df.to_csv("Data_hated.csv")
+        
+        columns = ['app', 'device', 'os', 'channel']
+        df.drop(columns, inplace=True, axis=1)
+        df.to_csv('output_data.csv')
 
 run()
 
