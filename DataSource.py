@@ -44,11 +44,11 @@ def partitionData():
         test = X[(train_C + 1):,:]
         # print(train[-1])
         # print(test[1])
-        print(test[:,-1])
-        print(np.shape(train[:,:-1]))
-        print(np.shape(train[:,-1]))
-        print(np.shape(test[:, :-1]))
-        print(np.shape( test[:,-1]))
+        # print(test[:,-1])
+        # print(np.shape(train[:,:-1]))
+        # print(np.shape(train[:,-1]))
+        # print(np.shape(test[:, :-1]))
+        # print(np.shape( test[:,-1]))
         return train[:,:-1], train[:,-1], test[:, :-1], test[:,-1]
 partitionData()
 # def run():
