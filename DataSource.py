@@ -3,33 +3,33 @@ import pandas as pd
 import random
 from sklearn.preprocessing import OneHotEncoder
 
-# def process_data():
-#     X = np.zeros((1,6))
-#     Y = np.zeros((1,1))
-#     counter = 0
-#     for chunk_df in pd.read_csv('train.csv', chunksize = 1000):
-#         chunk_ma = chunk_df.as_matrix()
-#         chunk_ma = chunk_ma[np.argsort(chunk_ma[:, 7])]
-#         i = 999
-#         while chunk_ma[i][7] == 1:
-#             Y = np.vstack([Y,[1]])
-#             X = np.vstack([X, chunk_ma[i][:6]])
-#             i = i-1
+def process_data():
+    X = np.zeros((1,6))
+    Y =- np.zeros((1,1))
+    counter = 0
+    for chunk_df in pd.read_csv('train.csv', chunksize = 1000):
+        chunk_ma = chunk_df.as_matrix()
+        chunk_ma = chunk_ma[np.argsort(chunk_ma[:, 7])]
+        i = 999
+        while chunk_ma[i][7] == 1:
+            Y = np.vstack([Y,[1]])
+            X = np.vstack([X, chunk_ma[i][:6]])
+            i = i-1
             
-#         temp = random.sample(range(i), 2)
+        temp = random.sample(range(i), 2)
         
-#         Y = np.vstack([Y,[0]])
-#         X = np.vstack([X, chunk_ma[random.randint(temp[0], i)][:6]])
+        Y = np.vstack([Y,[0]])
+        X = np.vstack([X, chunk_ma[random.randint(temp[0], i)][:6]])
         
-#         Y = np.vstack([Y,[0]])
-#         X = np.vstack([X, chunk_ma[random.randint(temp[1], i)][:6]])
-#         counter = counter + 1
-#         print(counter)
+        Y = np.vstack([Y,[0]])
+        X = np.vstack([X, chunk_ma[random.randint(temp[1], i)][:6]])
+        counter = counter + 1
+        print(counter)
     
-#     df = pd.DataFrame(X[1:])
-#     df.to_csv("X.csv")
-#     df = pd.DataFrame(Y[1:])
-#     df.to_csv("Y.csv")
+    df = pd.DataFrame(X[1:])
+    df.to_csv("XJongho.csv")
+    df = pd.DataFrame(Y[1:])
+    df.to_csv("YJongho.csv")
 
 # Use Sklearn to do one hot encoding
 # le_color = LabelEncoder()
@@ -98,7 +98,7 @@ def partitionData():
 # df = pd.concat([df, dfOneHot], axis=1)
 # dfOneHot = pd.DataFrame(Xm, columns = ["Make"+str(int(i)) for i in range(X.shape[1])])
 # df = pd.concat([df, dfOneHot], axis=1)
-
+process_data()
 
 
 

@@ -21,6 +21,9 @@ print(np.mean(hingeSGD))
 clf3 = RandomForestClassifier()
 clf3.fit(train_x, train_y)
 print(clf3.oob_score(test_x, test_y))
+
+
+
 # squareSGD = []
 # for i in range(50):
 #     clf3 = SGDClassifier(loss='squared_loss', penalty='l1', alpha=0.0001)
