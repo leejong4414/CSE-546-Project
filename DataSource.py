@@ -24,7 +24,8 @@ def process_data():
         Y = np.vstack([Y,[0]])
         X = np.vstack([X, chunk_ma[random.randint(temp[1], i)][:6]])
         counter = counter + 1
-        print(counter)
+        if (counter % 100000 == 0):
+                print(counter)
     
     df = pd.DataFrame(X[1:])
     df.to_csv("XJongho.csv")
