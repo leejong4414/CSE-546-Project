@@ -10,7 +10,7 @@ def process_data():
     for chunk_df in pd.read_csv('train.csv', chunksize = 1000):
         chunk_ma = chunk_df.as_matrix()
         chunk_ma = chunk_ma[np.argsort(chunk_ma[:, 7])]
-        i = 999
+        i = chunk_ma.shape[0] - 1
         while chunk_ma[i][7] == 1:
             Y = np.vstack([Y,[1]])
             X = np.vstack([X, chunk_ma[i][:6]])
