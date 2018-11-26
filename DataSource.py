@@ -2,18 +2,16 @@ import numpy as np
 import pandas as pd
 import random
 from sklearn.preprocessing import OneHotEncoder
-import time
-import progressbar
+from tqdm import tqdm
 
 def process_data():
     X = np.zeros((1,6))
     Y =- np.zeros((1,1))
     counter = 0
-    for chunk_df in progressbar.progressbar(pd.read_csv('train.csv', chunksize = 1000)):
-        time.sleep(0.02)
+    for chunk_df in tqdm(pd.read_csv('train.csv', chunksize = 1000)):
         chunk_ma = chunk_df.as_matrix()
         chunk_ma = chunk_ma[np.argsort(chunk_ma[:, 7])]
-        i = 999
+        i = np.shape(chunk_ma)[0]
         j = 0
         while chunk_ma[i][7] == 1:
             if j < 2:
