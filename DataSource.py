@@ -3,6 +3,7 @@ import pandas as pd
 import random
 from tqdm import tqdm
 from sklearn.preprocessing import OneHotEncoder
+from tqdm import tqdm
 
 def process_data():
     X = np.zeros((1,6))
@@ -17,6 +18,7 @@ def process_data():
             if j < 2:
                 Y = np.vstack([Y,[1]])
                 X = np.vstack([X, chunk_ma[i][:6]])
+                j = j + 1
             i = i-1
 
         temp = random.sample(range(i), 2)
@@ -27,7 +29,7 @@ def process_data():
         Y = np.vstack([Y,[0]])
         X = np.vstack([X, chunk_ma[random.randint(temp[1], i)][:6]])
         counter = counter + 1
-        if (counter % 100000 == 0):
+        if (counter % 10000 == 0):
                 print(counter)
     
     df = pd.DataFrame(X[1:])
