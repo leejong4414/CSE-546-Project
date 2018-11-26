@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import random
+from tqdm import tqdm
 from sklearn.preprocessing import OneHotEncoder
 from tqdm import tqdm
 
@@ -11,7 +12,7 @@ def process_data():
     for chunk_df in tqdm(pd.read_csv('train.csv', chunksize = 1000)):
         chunk_ma = chunk_df.as_matrix()
         chunk_ma = chunk_ma[np.argsort(chunk_ma[:, 7])]
-        i = np.shape(chunk_ma)[0]-1
+        i = chunk_ma.shape[0] - 1
         j = 0
         while chunk_ma[i][7] == 1:
             if j < 2:
@@ -19,7 +20,7 @@ def process_data():
                 X = np.vstack([X, chunk_ma[i][:6]])
                 j = j + 1
             i = i-1
-            
+
         temp = random.sample(range(i), 2)
         
         Y = np.vstack([Y,[0]])
@@ -32,9 +33,9 @@ def process_data():
                 print(counter)
     
     df = pd.DataFrame(X[1:])
-    df.to_csv("XJongho.csv")
+    df.to_csv("XJongho2.csv")
     df = pd.DataFrame(Y[1:])
-    df.to_csv("YJongho.csv")
+    df.to_csv("YJongho2.csv")
 
 # Use Sklearn to do one hot encoding
 # le_color = LabelEncoder()
