@@ -21,6 +21,7 @@ print("Decision Tree")
 for i in range(1,20):
     clf = tree.DecisionTreeClassifier(max_depth=i)
     clf.fit(X_train, y_train)
+    print(str(i) +" : " + str(clf.score(X_train, y_train)))
     print(str(i) +" : " + str(clf.score(X_test, y_test)))
     #tree.export_graphviz(clf, out_file='tree'+ str(i) + '.dot')
 
@@ -33,6 +34,7 @@ X_test_transformed = pca.transform(X_test)
 for i in range(1,20):
     clf = tree.DecisionTreeClassifier(max_depth=i)
     clf.fit(X_train_transformed, y_train)
+    print(str(i) +" : " + str(clf.score(X_train_transformed, y_train)))
     print(str(i) +" : " + str(clf.score(X_test_transformed, y_test)))
     #tree.export_graphviz(clf, out_file='tree'+ str(i) + '.dot')
 
