@@ -11,7 +11,7 @@ def process_data():
     for chunk_df in tqdm(pd.read_csv('train.csv', chunksize = 1000)):
         chunk_ma = chunk_df.as_matrix()
         chunk_ma = chunk_ma[np.argsort(chunk_ma[:, 7])]
-        i = np.shape(chunk_ma)[0]
+        i = np.shape(chunk_ma)[0]-1
         j = 0
         while chunk_ma[i][7] == 1:
             if j < 2:
