@@ -3,7 +3,6 @@ import pandas as pd
 import random
 from tqdm import tqdm
 from sklearn.preprocessing import OneHotEncoder
-from tqdm import tqdm
 
 def process_data():
     X = np.zeros((1,6))
