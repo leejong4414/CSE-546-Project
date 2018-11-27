@@ -8,11 +8,31 @@ from sklearn.decomposition import PCA
 from tqdm import tqdm
 
 def partitionData():
-    X_train = np.genfromtxt("./../Feature Engineering/train_final_OHE.csv", delimiter=",")
-    X_test = np.genfromtxt("./../Feature Engineering/test_final_OHE.csv", delimiter=",")
+    X_train = np.genfromtxt("./../Feature Engineering/train_final_OHE.csv", delimiter=",", dtype = float)
+    X_test = np.genfromtxt("./../Feature Engineering/test_final_OHE.csv", delimiter=",", dtype = float)
     return X_train[:,:-1], X_train[:,-1], X_test[:, :-1], X_test[:,-1] #X_train, Y_train, X_test, Y_test
 
 X_train, y_train, X_test, y_test = partitionData()
+
+# def partitionData():
+#     X_train = pd.read_csv('./../Feature Engineering/train_final_OHE.csv')
+#     X_test =  pd.read_csv('./../Feature Engineering/test_final_OHE.csv')
+    
+#     print(np.shape(X_train.as_matrix()))
+#     X_train.dropna()
+#     X_train = X_train.as_matrix()
+#     print(np.shape(X_train))
+    
+#     print(np.shape(X_train.as_matrix()))
+#     X_train.dropna()
+#     X_test = X_test.as_matrix()
+#     print(np.shape(X_test))
+  
+#     return X_train[:,:-1], X_train[:,-1], X_test[:, :-1], X_test[:,-1] #X_train, Y_train, X_test, Y_test
+
+X_train, y_train, X_test, y_test = partitionData()
+
+
 
 #pca
 print("Decision Tree")
