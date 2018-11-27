@@ -51,35 +51,35 @@ def partitionData():
         test = X[(train_C + 1):,:]
         return train[:,:-1], train[:,-1], test[:, :-1], test[:,-1]
 
-# def run():
-#         df =  pd.read_csv('dataset.csv', delimiter=',')
-#         app_ohe = OneHotEncoder()
-#         device_ohe = OneHotEncoder()
-#         os_ohe = OneHotEncoder()
-#         channel_ohe = OneHotEncoder()
+def run():
+        df =  pd.read_csv('train_final.csv', delimiter=',')
+        app_ohe = OneHotEncoder()
+        device_ohe = OneHotEncoder()
+        os_ohe = OneHotEncoder()
+        channel_ohe = OneHotEncoder()
 
-#         app_X = app_ohe.fit_transform(df.app.values.reshape(-1,1)).toarray()
-#         device_ohe_X = device_ohe.fit_transform(df.device.values.reshape(-1,1)).toarray()
-#         os_ohe_X = os_ohe.fit_transform(df.os.values.reshape(-1,1)).toarray()
-#         channel_ohe_X = channel_ohe.fit_transform(df.channel.values.reshape(-1,1)).toarray()
+        app_X = app_ohe.fit_transform(df.app.values.reshape(-1,1)).toarray()
+        device_ohe_X = device_ohe.fit_transform(df.device.values.reshape(-1,1)).toarray()
+        os_ohe_X = os_ohe.fit_transform(df.os.values.reshape(-1,1)).toarray()
+        channel_ohe_X = channel_ohe.fit_transform(df.channel.values.reshape(-1,1)).toarray()
 
-#         dfOneHot = pd.DataFrame(app_X, columns = ["app_" + str(int(i)) for i in range(app_X.shape[1])])
-#         df = pd.concat([df, dfOneHot], axis = 1)
+        dfOneHot = pd.DataFrame(app_X, columns = ["app_" + str(int(i)) for i in range(app_X.shape[1])])
+        df = pd.concat([df, dfOneHot], axis = 1)
 
-#         dfOneHot = pd.DataFrame(device_ohe_X, columns=["device_"+str(int(i)) for i in range (device_ohe_X.shape[1])])
-#         df = pd.concat([df, dfOneHot], axis = 1)
+        dfOneHot = pd.DataFrame(device_ohe_X, columns=["device_"+str(int(i)) for i in range (device_ohe_X.shape[1])])
+        df = pd.concat([df, dfOneHot], axis = 1)
 
-#         dfOneHot = pd.DataFrame(os_ohe_X, columns=["os_" + str(int(i)) for i in range(os_ohe_X.shape[1])])
-#         df = pd.concat([df, dfOneHot], axis = 1)
+        dfOneHot = pd.DataFrame(os_ohe_X, columns=["os_" + str(int(i)) for i in range(os_ohe_X.shape[1])])
+        df = pd.concat([df, dfOneHot], axis = 1)
 
-#         dfOneHot = pd.DataFrame(channel_ohe_X, columns=["channel_" + str(int(i)) for i in range(channel_ohe_X.shape[1])])
-#         df = pd.concat([df, dfOneHot], axis = 1)
+        dfOneHot = pd.DataFrame(channel_ohe_X, columns=["channel_" + str(int(i)) for i in range(channel_ohe_X.shape[1])])
+        df = pd.concat([df, dfOneHot], axis = 1)
         
-#         columns = ['app', 'device', 'os', 'channel']
-#         df.drop(columns, inplace=True, axis=1)
-#         df.to_csv('output_data.csv')
+        columns = ['app', 'device', 'os', 'channel']
+        df.drop(columns, inplace=True, axis=1)
+        df.to_csv('train_final_OHE.csv')
         
-# run()
+run()
 
 # df = pd.DataFrame([
 #        [0, 1, 2017],
@@ -104,7 +104,7 @@ def partitionData():
 # df = pd.concat([df, dfOneHot], axis=1)
 # dfOneHot = pd.DataFrame(Xm, columns = ["Make"+str(int(i)) for i in range(X.shape[1])])
 # df = pd.concat([df, dfOneHot], axis=1)
-process_data()
+# process_data()
 
 
 
