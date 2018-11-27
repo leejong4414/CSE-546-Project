@@ -8,18 +8,18 @@ def process_data():
     X = np.zeros((1,6))
     Y =- np.zeros((1,1))
     counter = 0
-    for chunk_df in tqdm(pd.read_csv('train.csv', chunksize = 1000)):
+    for chunk_df in tqdm(pd.read_csv('train.csv', chunksize = 10000)):
         chunk_ma = chunk_df.as_matrix()
         chunk_ma = chunk_ma[np.argsort(chunk_ma[:, 7])]
         i = chunk_ma.shape[0] - 1
         j = 0
         while chunk_ma[i][7] == 1:
-            if j < 2:
-                Y = np.vstack([Y,[1]])
-                X = np.vstack([X, chunk_ma[i][:6]])
-                j = j + 1
+            # if j < 2:
+            #     Y = np.vstack([Y,[1]])
+            #     X = np.vstack([X, chunk_ma[i][:6]])
+            #     j = j + 1
             i = i-1
-
+        temp2 = random.sample(range(i, chunk_ma.shape[0] - 1), 2)
         temp = random.sample(range(i), 2)
         
         Y = np.vstack([Y,[0]])
@@ -27,6 +27,13 @@ def process_data():
         
         Y = np.vstack([Y,[0]])
         X = np.vstack([X, chunk_ma[random.randint(temp[1], i)][:6]])
+        
+        Y = np.vstack([Y,[0]])
+        X = np.vstack([X, chunk_ma[random.randint(temp2[0], i)][:6]])
+        
+        Y = np.vstack([Y,[0]])
+        X = np.vstack([X, chunk_ma[random.randint(temp2[1], i)][:6]])
+ 
         counter = counter + 1
         if (counter % 10000 == 0):
                 print(counter)
