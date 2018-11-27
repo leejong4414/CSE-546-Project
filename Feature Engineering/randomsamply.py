@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
 
-X = pd.read_csv('train.csv')
+#/Users/Eric/Desktop/CSE-546-Project/Feature Engineering/train.csv
+X = pd.read_csv("")
 
 x = X.shape[0]
 n = X.shape[0]
