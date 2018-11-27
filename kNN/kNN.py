@@ -20,5 +20,6 @@ model = KNeighborsClassifier(n_neighbors=3)
 model.fit(X_train, y_train)
 
 #Predict Output
-predicted= model.predict([[0,2]]) # 0:Overcast, 2:Mild
+predicted= model.predict(X_test) # 0:Overcast, 2:Mild
 print(predicted)
+print(model.score(X_test, y_test))
