@@ -15,11 +15,12 @@ def partitionData():
 
 X_train, y_train, X_test, y_test = partitionData()
 
-model = KNeighborsClassifier(n_neighbors=3)
-# Train the model using the training sets
-model.fit(X_train, y_train)
+for i in range(len(10)):
+    model = KNeighborsClassifier(n_neighbors=(i + 1))
+    # Train the model using the training sets
+    model.fit(X_train, y_train)
 
-#Predict Output
-predicted= model.predict(X_test) # 0:Overcast, 2:Mild
-print(predicted)
-print(model.score(X_test, y_test))
+    #Predict Output
+    predicted= model.predict(X_test) # 0:Overcast, 2:Mild
+    print(predicted)
+    print(model.score(X_test, y_test))
