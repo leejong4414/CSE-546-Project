@@ -8,8 +8,8 @@ from sklearn.decomposition import PCA
 from tqdm import tqdm
 
 def partitionData():
-    X_train = np.genfromtxt("./../Feature Engineering/train_final_OHE.csv", delimiter=",", dtype = float)
-    X_test = np.genfromtxt("./../Feature Engineering/test_final_OHE.csv", delimiter=",", dtype = float)
+    X_train = np.genfromtxt("./../Feature Engineering/train_final.csv", delimiter=",", dtype = float)
+    X_test = np.genfromtxt("./../Feature Engineering/test_final.csv", delimiter=",", dtype = float)
     return X_train[:,:-1], X_train[:,-1], X_test[:, :-1], X_test[:,-1] #X_train, Y_train, X_test, Y_test
 
 X_train, y_train, X_test, y_test = partitionData()
