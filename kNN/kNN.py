@@ -6,13 +6,12 @@ from sklearn.neighbors import KNeighborsClassifier
 
 def partitionData():
     print("process train")
-    X_train = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/train_final.csv", delimiter=",")
+    X_train = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/train_final.csv", delimiter=",", dtype = float)
     print("process test")
-    X_test = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/test_final.csv", delimiter=",")
+    X_test = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/test_final.csv", delimiter="," , dtype = float)
     print("finish process")
     X_train = X_train[1:, :]  # Excluse first row which is title names
-    return X_train[:, :-1], X_train[:, -1], X_test[:, :-1], X_test[:, -1]  # X_train, Y_train, X_test, Y_test
-
+    return X_train[1:, :-1], X_train[1:, -1], X_test[1:, :-1], X_test[1:, -1]  # X_train, Y_train, X_test, Y_test
 
 X_train, y_train, X_test, y_test = partitionData()
 
