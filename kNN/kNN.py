@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import random
 from sklearn.neighbors import KNeighborsClassifier
+from tqdm import tqdm
 
 
 def partitionData():
@@ -15,7 +16,7 @@ def partitionData():
 
 X_train, y_train, X_test, y_test = partitionData()
 
-for i in range(10):
+for i in tqdm(range(10)):
     print(i)
     model = KNeighborsClassifier(n_neighbors=(i + 1))
     # Train the model using the training sets
