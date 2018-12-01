@@ -16,7 +16,11 @@ def partitionData():
 
 X_train, y_train, X_test, y_test = partitionData()
 
-for i in tqdm(range(10)):
+# pca = PCA()
+# X_train_transformed = pca.fit_transform(X_train)
+# X_test_transformed = pca.transform(X_test)
+
+for i in tqdm(range(10, 20)):
     print(i)
     model = KNeighborsClassifier(n_neighbors=(i + 1))
     # Train the model using the training sets
@@ -26,3 +30,4 @@ for i in tqdm(range(10)):
     predicted= model.predict(X_test)
     # print(predicted)
     print(model.score(X_test, y_test))
+
