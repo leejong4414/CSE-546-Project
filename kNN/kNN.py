@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import random
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.decomposition import PCA
 from tqdm import tqdm
 
 
@@ -16,11 +17,11 @@ def partitionData():
 
 X_train, y_train, X_test, y_test = partitionData()
 
-# pca = PCA()
-# X_train_transformed = pca.fit_transform(X_train)
-# X_test_transformed = pca.transform(X_test)
+pca = PCA()
+X_train_transformed = pca.fit_transform(X_train)
+X_test_transformed = pca.transform(X_test)
 
-for i in tqdm(range(10, 20)):
+for i in tqdm(range(20)):
     print(i)
     model = KNeighborsClassifier(n_neighbors=(i + 1))
     # Train the model using the training sets
