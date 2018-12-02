@@ -56,7 +56,7 @@ for i in tqdm(range(n)):
     clf = tree.DecisionTreeClassifier(max_depth=(i+1))
     clf.fit(X_train, y_train)
     train_error.append(clf.score(X_train, y_train))
-    error = clf.score(X_validation, y_train)
+    error = clf.score(X_validation, y_validation)
     test_error.append(error)
     tree.export_graphviz(clf, out_file='tree'+ str(i) + '.dot')
     if error < min_error:
@@ -90,7 +90,7 @@ for i in tqdm(range(n)):
     clf = tree.DecisionTreeClassifier(max_depth=(i+1))
     clf.fit(X_train_transformed, y_train)
     train_error.append(clf.score(X_train, y_train))
-    test_error.append(clf.score(X_validation, y_train))
+    test_error.append(clf.score(X_validation, y_validation))
     tree.export_graphviz(clf, out_file='tree_PCA'+ str(i) + '.dot')
     if error < min_error:
         finalTree = clf
