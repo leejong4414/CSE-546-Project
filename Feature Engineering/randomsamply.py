@@ -14,7 +14,6 @@ X_new = np.append(X[:,1],X[:,3:], axis=1)
 X_new = np.append(X_new,X[:,2], axis=1)
 # rand_idx = np.random.choice(x, (n), replace=False)
 # X = X[rand_idx]
-np.append([[1, 2, 3], [4, 5, 6]], [[7, 8, 9]], axis=0)
 end = int(X.shape[0]*0.9)
 train_X = X[:end,:]
 test_X = X[end:,:]

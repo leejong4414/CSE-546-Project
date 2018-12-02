@@ -10,7 +10,8 @@ from tqdm import tqdm
 def partitionData():
     X_train = np.genfromtxt("./../Feature Engineering/train_final.csv", delimiter=",", dtype = float)
     X_test = np.genfromtxt("./../Feature Engineering/test_final.csv", delimiter=",", dtype = float)
-    return X_train[:,:-1], X_train[:,-1], X_test[:, :-1], X_test[:,-1] #X_train, Y_train, X_test, Y_test
+    
+    return X_train[1:,:-1], X_train[1:,-1], X_test[1:, :-1], X_test[1:,-1] #X_train, Y_train, X_test, Y_test
 
 X_train, y_train, X_test, y_test = partitionData()
 
@@ -31,32 +32,81 @@ X_train, y_train, X_test, y_test = partitionData()
 #     return X_train[:,:-1], X_train[:,-1], X_test[:, :-1], X_test[:,-1] #X_train, Y_train, X_test, Y_test
 
 X_train, y_train, X_test, y_test = partitionData()
+print(np.shape(X_train))
+print(np.shape(y_train))
+cut = int (np.shape(X_train)[0] * 0.8)
+print(cut)
+
+X_validation = X_train[cut:,:]
+X_train = X_train[:cut,:]
+y_validation = y_train[cut:]
+y_train = y_train[:cut]
+n = 50
 
 
+train_error = []
+test_error = []
 
+finalTree = tree.DecisionTreeClassifier()
+min_error = float('inf')
+min_depth = 0
 #pca
-print("Decision Tree")
-for i in tqdm(range(1,20)):
-    clf = tree.DecisionTreeClassifier(max_depth=i)
+print("Decision Tree with out pca")
+for i in tqdm(range(n)):
+    clf = tree.DecisionTreeClassifier(max_depth=(i+1))
     clf.fit(X_train, y_train)
-    print(str(i) +" : " + str(clf.score(X_train, y_train)))
-    print(str(i) +" : " + str(clf.score(X_test, y_test)))
-    #tree.export_graphviz(clf, out_file='tree'+ str(i) + '.dot')
+    train_error.append(clf.score(X_train, y_train))
+    error = clf.score(X_validation, y_train)
+    test_error.append(error)
+    tree.export_graphviz(clf, out_file='tree'+ str(i) + '.dot')
+    if error < min_error:
+        finalTree = clf
+        min_depth = i+1
+    
+
+print("Decision Tree with out pca")
+for i in range(n):
+    print("depth : ", i+1)
+    print("train error : ", train_error[i])
+    print("validation error : ", test_error[i])
+
+print("best tree was depth ", min_depth)
+print("test error : ", finalTree.score(X_test, y_test))
 
 
-# print("Decision Tree with pca")
-# pca = PCA()
-# X_train_transformed = pca.fit_transform(X_train)
-# X_test_transformed = pca.transform(X_test)
+train_error = []
+test_error = []
 
-# for i in range(1,20):
-#     clf = tree.DecisionTreeClassifier(max_depth=i)
-#     clf.fit(X_train_transformed, y_train)
-#     print(str(i) +" : " + str(clf.score(X_train_transformed, y_train)))
-#     print(str(i) +" : " + str(clf.score(X_test_transformed, y_test)))
-#     #tree.export_graphviz(clf, out_file='tree'+ str(i) + '.dot')
+finalTree = tree.DecisionTreeClassifier()
+min_error = float('inf')
+min_depth = 0
+
+print("Decision Tree with pca")
+pca = PCA()
+X_train_transformed = pca.fit_transform(X_train)
+X_test_transformed = pca.transform(X_test)
+
+for i in tqdm(range(n)):
+    clf = tree.DecisionTreeClassifier(max_depth=(i+1))
+    clf.fit(X_train_transformed, y_train)
+    train_error.append(clf.score(X_train, y_train))
+    test_error.append(clf.score(X_validation, y_train))
+    tree.export_graphviz(clf, out_file='tree_PCA'+ str(i) + '.dot')
+    if error < min_error:
+        finalTree = clf
+        min_depth = i+1
 
 
+
+print("Decision Tree with pca")
+for i in range(n):
+    print("depth : ", i+1)
+    print("train error : ", train_error[i])
+    print("validation error : ", test_error[i])
+
+print("best tree was depth ", min_depth)
+print("test error : ", finalTree.score(X_test, y_test))
+    
 
 
 
