@@ -25,35 +25,35 @@ y_validation = y_train[cut:]
 y_train = y_train[:cut]
 n = 50
 
-# train_accuracy = []
-# validation_accuracy = []
+train_accuracy = []
+validation_accuracy = []
 
-# finalTree = tree.DecisionTreeClassifier()
-# max_accuracy = 0
-# min_depth = 0
-# #pca
-# print("Decision Tree with out pca")
-# for i in tqdm(range(n)):
-#     clf = tree.DecisionTreeClassifier(max_depth=(i+1))
-#     clf.fit(X_train, y_train)
-#     train_accuracy.append(clf.score(X_train, y_train))
-#     accuracy = clf.score(X_validation, y_validation)
-#     validation_accuracy.append(accuracy)
-#     tree.export_graphviz(clf, out_file='tree'+ str(i) + '.dot')
-#     if accuracy > max_accuracy:
-#         max_accuracy = accuracy
-#         finalTree = clf
-#         min_depth = i+1
+finalTree = tree.DecisionTreeClassifier()
+max_accuracy = 0
+min_depth = 0
+#pca
+print("Decision Tree with out pca")
+for i in tqdm(range(n)):
+    clf = tree.DecisionTreeClassifier(max_depth=(i+1))
+    clf.fit(X_train, y_train)
+    train_accuracy.append(clf.score(X_train, y_train))
+    accuracy = clf.score(X_validation, y_validation)
+    validation_accuracy.append(accuracy)
+    tree.export_graphviz(clf, out_file='tree'+ str(i) + '.dot')
+    if accuracy > max_accuracy:
+        max_accuracy = accuracy
+        finalTree = clf
+        min_depth = i+1
     
-# for i in range(n):
-#     print("depth : ", i+1)
-#     print("train error : ", train_accuracy[i])
-#     print("validation error : ", validation_accuracy[i])
+for i in range(n):
+    print("depth : ", i+1)
+    print("train error : ", train_accuracy[i])
+    print("validation error : ", validation_accuracy[i])
 
-# print("+++++++++++++++++++++++++++++++++++++++++++++++")
-# print("best tree was depth ", min_depth)
-# print("test error : ", finalTree.score(X_test, y_test))
-# print("+++++++++++++++++++++++++++++++++++++++++++++++")
+print("+++++++++++++++++++++++++++++++++++++++++++++++")
+print("best tree was depth ", min_depth)
+print("test error : ", finalTree.score(X_test, y_test))
+print("+++++++++++++++++++++++++++++++++++++++++++++++")
 
 
 
@@ -75,7 +75,6 @@ y_train = y_train[:cut]
 # print("X_train_transformed",np.shape(X_train_transformed))
 # print("y_validation",np.shape(y_validation))
 # print("y_train",np.shape(y_train))
-n = 50
 
 
 finalTree = tree.DecisionTreeClassifier()
@@ -94,7 +93,7 @@ for i in tqdm(range(n)):
         max_accuracy = accuracy
         finalTree = clf
         min_depth = i+1
-    
+    #M 256 n = 5 p 3
 
 print("Decision Tree with out pca")
 for i in range(n):
