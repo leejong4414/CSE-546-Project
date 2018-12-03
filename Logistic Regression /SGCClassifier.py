@@ -23,54 +23,54 @@ Y_Validation = Y_train[cut:]
 Y_Train = Y_train[:cut]
 n = 50
 
-bar_plt = {}
-bar_plt_v = {}
-# for i in range(50):
-clf2 = SGDClassifier(loss='hinge', penalty='l2', alpha=0.0001)
-clf2.fit(X_Train, Y_Train)
-print("Validation Error : {}".format(clf2.score(X_Validation, Y_Validation)))
-print("Test Error : {}".format(clf2.score(X_test, Y_test)))
-bar_plt_v['Hinge - L2'] = clf2.score(X_Validation, Y_Validation)
-bar_plt['Hinge - L2'] = clf2.score(X_test, Y_test)
-print(clf2)
-
-clf2 = SGDClassifier(loss='squared_loss', penalty='l2', alpha=0.0001)
-clf2.fit(X_Train, Y_Train)
-print("Accuracy Validation: {}".format(clf2.score(X_Validation, Y_Validation)))
-print("Accuracy Test: {}".format(clf2.score(X_test, Y_test)))
-bar_plt_v['Squared - L2'] = clf2.score(X_Validation, Y_Validation)
-bar_plt['Squared - L2'] = clf2.score(X_test, Y_test)
-print(clf2)
-
-clf2 = SGDClassifier(loss='hinge', penalty='l1', alpha=0.0001)
-clf2.fit(X_Train, Y_Train)
-print("Accuracy Validation: {}".format(clf2.score(X_Validation, Y_Validation)))
-print("Accuracy Test: {}".format(clf2.score(X_test, Y_test)))
-bar_plt_v['Hinge - L1'] = clf2.score(X_Validation, Y_Validation)
-bar_plt['Hinge - L1'] = clf2.score(X_test, Y_test)
-print(clf2)
-
-clf2 = SGDClassifier(loss='squared_loss', penalty='l1', alpha=0.0001)
-clf2.fit(X_Train, Y_Train)
-print("Accuracy Validation: {}".format(clf2.score(X_Validation, Y_Validation)))
-print("Accuracy Test Data: {}".format(clf2.score(X_test, Y_test)))
-bar_plt_v['Squared - L1'] = clf2.score(X_Validation, Y_Validation)
-bar_plt['Squared L1'] = clf2.score(X_test, Y_test)
-print(clf2)
-
-plt.bar(list(bar_plt.keys()),list(bar_plt.values()))
-plt.title("Accuracy - Test")
-plt.xlabel("Loss Function and Penalty")
-plt.ylabel("Accuracy")
-plt.savefig("./test_AccLR.png")
-plt.close()
-
-plt.bar(list(bar_plt_v.keys()),list(bar_plt_v.values()))
-plt.title("Accuracy - Validatio ")
-plt.xlabel("Loss Function and Penalty")
-plt.ylabel("Accuracy")
-plt.savefig("./validation_AccLR.png")
-plt.close()
+# bar_plt = {}
+# bar_plt_v = {}
+# # for i in range(50):
+# clf2 = SGDClassifier(loss='hinge', penalty='l2', alpha=0.0001)
+# clf2.fit(X_Train, Y_Train)
+# print("Validation Error : {}".format(clf2.score(X_Validation, Y_Validation)))
+# print("Test Error : {}".format(clf2.score(X_test, Y_test)))
+# bar_plt_v['Hinge - L2'] = clf2.score(X_Validation, Y_Validation)
+# bar_plt['Hinge - L2'] = clf2.score(X_test, Y_test)
+# print(clf2)
+#
+# clf2 = SGDClassifier(loss='squared_loss', penalty='l2', alpha=0.0001)
+# clf2.fit(X_Train, Y_Train)
+# print("Accuracy Validation: {}".format(clf2.score(X_Validation, Y_Validation)))
+# print("Accuracy Test: {}".format(clf2.score(X_test, Y_test)))
+# bar_plt_v['Squared - L2'] = clf2.score(X_Validation, Y_Validation)
+# bar_plt['Squared - L2'] = clf2.score(X_test, Y_test)
+# print(clf2)
+#
+# clf2 = SGDClassifier(loss='hinge', penalty='l1', alpha=0.0001)
+# clf2.fit(X_Train, Y_Train)
+# print("Accuracy Validation: {}".format(clf2.score(X_Validation, Y_Validation)))
+# print("Accuracy Test: {}".format(clf2.score(X_test, Y_test)))
+# bar_plt_v['Hinge - L1'] = clf2.score(X_Validation, Y_Validation)
+# bar_plt['Hinge - L1'] = clf2.score(X_test, Y_test)
+# print(clf2)
+#
+# clf2 = SGDClassifier(loss='squared_loss', penalty='l1', alpha=0.0001)
+# clf2.fit(X_Train, Y_Train)
+# print("Accuracy Validation: {}".format(clf2.score(X_Validation, Y_Validation)))
+# print("Accuracy Test Data: {}".format(clf2.score(X_test, Y_test)))
+# bar_plt_v['Squared - L1'] = clf2.score(X_Validation, Y_Validation)
+# bar_plt['Squared L1'] = clf2.score(X_test, Y_test)
+# print(clf2)
+#
+# plt.bar(list(bar_plt.keys()),list(bar_plt.values()))
+# plt.title("Accuracy - Test")
+# plt.xlabel("Loss Function and Penalty")
+# plt.ylabel("Accuracy")
+# plt.savefig("./test_AccLR.png")
+# plt.close()
+#
+# plt.bar(list(bar_plt_v.keys()),list(bar_plt_v.values()))
+# plt.title("Accuracy - Validatio ")
+# plt.xlabel("Loss Function and Penalty")
+# plt.ylabel("Accuracy")
+# plt.savefig("./validation_AccLR.png")
+# plt.close()
 
 
 
@@ -89,9 +89,44 @@ plt.close()
 # print(np.mean(squareSGD))
 
 # logistCV = []
+
+# plot in terms of cv
+# plot in terms of penalty
+# plot in terms of
+cv = range(1,6)
+solvers = ['sag','saga','lbfgs']
+penalty = ['l1','l2']
 # for i in range(50):
-logist = LogisticRegressionCV(cv=4, solver='sag', max_iter=10000)
-logist.fit(X_train, Y_train)
+
+logisc_t = {}
+logisc_v = {}
+
+for i in cv:
+    for pen in penalty:
+        logist = LogisticRegressionCV(cv=i, solver='saga', max_iter=10000, penalty=pen)
+        logist.fit(X_train, Y_train)
+        key = "Pen={},CV={}".format(pen,i)
+        logisc_t[key] = logist.score(X_test, Y_test)
+        logisc_v[key] = logist.score(X_Validation, Y_Validation)
+
+plt.bar(list(logisc_t.keys()), list(logisc_t.values()))
+plt.title("Accuracy Test")
+plt.xlabel("Penalty with CV")
+plt.ylabel("Accuracy")
+plt.savefig("./LogisticTest.png")
+plt.close()
+
+plt.bar(list(logisc_v.keys()), list(logisc_v.values()))
+plt.title("Accuracy Validation")
+plt.xlabel("Penalty with CV")
+plt.ylabel("Accuracy")
+plt.savefig("./LogisticValidation.png")
+plt.close()
+
+
+
+
+
 print(logist.score(X_test, Y_test))
 print(logist)
 #     if (i == 0):

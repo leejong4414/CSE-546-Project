@@ -33,8 +33,8 @@ def gradient_descent(X_train, y_train, X_test, y_test, lamda, eta):
     plot_error(list_err_train, list_err_test, "Error Rate for Gradient Descent")
     return w, b
 
-    def get_error(X, y, w, b):
-    return 1 - np.mean(np.sign(np.dot(X, w) + b) == y)
+def get_error(X, y, w, b):
+    return 1 - np.mean(np.argmax(np.dot(X, w) + b) == y)
 
 def plot_error(train, test, title):
     plt.plot(range(len(train)), train, label='Train')
@@ -43,7 +43,7 @@ def plot_error(train, test, title):
     plt.ylabel("Error Rate")
     plt.title(title)
     plt.legend()
-    plt.show()
+    plt.close()
 
 def plot_loss(train, test, title):
     plt.plot(range(len(train)), train, label='Train')
@@ -52,7 +52,7 @@ def plot_loss(train, test, title):
     plt.ylabel("Loss")
     plt.title(title)
     plt.legend()
-    plt.show()
+    plt.close()
 
 def get_loss(X, y, w, b, lamda):
     y_exp = np.dot(X, w) + b
