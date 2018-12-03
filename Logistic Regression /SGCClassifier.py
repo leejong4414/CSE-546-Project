@@ -3,7 +3,9 @@ from sklearn.linear_model import LogisticRegressionCV
 from sklearn.neighbors  import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
-
+import matplotlib as ml
+ml.use('Agg')
+import matplotlib.pyplot as plt
 
 def partitionData():
     X_train = np.genfromtxt("./../Feature Engineering/train_final.csv", delimiter=",", dtype = float)
@@ -12,40 +14,65 @@ def partitionData():
 
 X_train, Y_train, X_test, Y_test = partitionData()
 
-
 cut = int (np.shape(X_train)[0] * 0.8)
 print(cut)
 
-X_validation = X_train[cut:,:]
-X_train = X_train[:cut,:]
-y_validation = Y_train[cut:]
-y_train = Y_train[:cut]
+X_Validation = X_train[cut:,:]
+X_Train = X_train[:cut,:]
+Y_Validation = Y_train[cut:]
+Y_Train = Y_train[:cut]
 n = 50
 
+bar_plt = {}
+bar_plt_v = {}
 # for i in range(50):
 clf2 = SGDClassifier(loss='hinge', penalty='l2', alpha=0.0001)
-clf2.fit(X_train, Y_train)
-print("Validation Error : {}".format(clf2.score(X_validation, y_validation)))
+clf2.fit(X_Train, Y_Train)
+print("Validation Error : {}".format(clf2.score(X_Validation, Y_Validation)))
 print("Test Error : {}".format(clf2.score(X_test, Y_test)))
+bar_plt_v['Hinge - L2'] = clf2.score(X_Validation, Y_Validation)
+bar_plt['Hinge - L2'] = clf2.score(X_test, Y_test)
 print(clf2)
 
-clf2 = SGDClassifier(loss='squared', penalty='l2', alpha=0.0001)
-clf2.fit(X_train, Y_train)
-print("Validation Error : {}".format(clf2.score(X_validation, y_validation)))
-print("Test Error : {}".format(clf2.score(X_test, Y_test)))
+clf2 = SGDClassifier(loss='squared_loss', penalty='l2', alpha=0.0001)
+clf2.fit(X_Train, Y_Train)
+print("Accuracy Validation: {}".format(clf2.score(X_Validation, Y_Validation)))
+print("Accuracy Test: {}".format(clf2.score(X_test, Y_test)))
+bar_plt_v['Squared - L2'] = clf2.score(X_Validation, Y_Validation)
+bar_plt['Squared - L2'] = clf2.score(X_test, Y_test)
 print(clf2)
 
 clf2 = SGDClassifier(loss='hinge', penalty='l1', alpha=0.0001)
-clf2.fit(X_train, Y_train)
-print("Validation Error : {}".format(clf2.score(X_validation, y_validation)))
-print("Test Error : {}".format(clf2.score(X_test, Y_test)))
+clf2.fit(X_Train, Y_Train)
+print("Accuracy Validation: {}".format(clf2.score(X_Validation, Y_Validation)))
+print("Accuracy Test: {}".format(clf2.score(X_test, Y_test)))
+bar_plt_v['Hinge - L1'] = clf2.score(X_Validation, Y_Validation)
+bar_plt['Hinge - L1'] = clf2.score(X_test, Y_test)
 print(clf2)
 
-clf2 = SGDClassifier(loss='squared', penalty='l1', alpha=0.0001)
-clf2.fit(X_train, Y_train)
-print("Validation Error : {}".format(clf2.score(X_validation, y_validation)))
-print("Test Error : {}".format(clf2.score(X_test, Y_test)))
+clf2 = SGDClassifier(loss='squared_loss', penalty='l1', alpha=0.0001)
+clf2.fit(X_Train, Y_Train)
+print("Accuracy Validation: {}".format(clf2.score(X_Validation, Y_Validation)))
+print("Accuracy Test Data: {}".format(clf2.score(X_test, Y_test)))
+bar_plt_v['Squared - L1'] = clf2.score(X_Validation, Y_Validation)
+bar_plt['Squared L1'] = clf2.score(X_test, Y_test)
 print(clf2)
+
+plt.bar(list(bar_plt.keys()),list(bar_plt.values()))
+plt.title("Accuracy - Test")
+plt.xlabel("Loss Function and Penalty")
+plt.ylabel("Accuracy")
+plt.savefig("./test_AccLR.png")
+plt.close()
+
+plt.bar(list(bar_plt_v.keys()),list(bar_plt_v.values()))
+plt.title("Accuracy - Validatio ")
+plt.xlabel("Loss Function and Penalty")
+plt.ylabel("Accuracy")
+plt.savefig("./validation_AccLR.png")
+plt.close()
+
+
 
 #     if (i == 0):
 #         print(clf2)
