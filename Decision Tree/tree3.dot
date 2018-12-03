@@ -49,7 +49,7 @@ node [shape=box] ;
 21 -> 23 ;
 24 [label="X[270] <= -0.005\ngini = 0.178\nsamples = 2326\nvalue = [2096, 230]"] ;
 16 -> 24 ;
-25 [label="X[415] <= 0.001\ngini = 0.198\nsamples = 18\nvalue = [2, 16]"] ;
+25 [label="X[222] <= 0.03\ngini = 0.198\nsamples = 18\nvalue = [2, 16]"] ;
 24 -> 25 ;
 26 [label="gini = 0.0\nsamples = 16\nvalue = [0, 16]"] ;
 25 -> 26 ;
