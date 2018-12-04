@@ -93,7 +93,7 @@ n = 50
 # plot in terms of cv
 # plot in terms of penalty
 # plot in terms of
-cv = range(1,6)
+cv = range(2,6)
 solvers = ['sag','saga','lbfgs']
 penalty = ['l1','l2']
 # for i in range(50):
