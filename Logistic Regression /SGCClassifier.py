@@ -103,7 +103,9 @@ logisc_t = {}
 logisc_v = {}
 
 for i in tqdm(cv):
+    print("Training with CV = {}".format(i))
     for pen in tqdm(penalty):
+        print("Penalty = {}".format(pen))
         logist = LogisticRegressionCV(cv=i, solver='saga', max_iter=10000, penalty=pen)
         logist.fit(X_train, Y_train)
         key = "Pen={},CV={}".format(pen,i)
