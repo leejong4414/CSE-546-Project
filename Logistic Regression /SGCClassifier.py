@@ -2,6 +2,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.linear_model import LogisticRegressionCV
 from sklearn.neighbors  import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
+from tqdm import tqdm
 import numpy as np
 import matplotlib as ml
 ml.use('Agg')
@@ -101,8 +102,8 @@ penalty = ['l1','l2']
 logisc_t = {}
 logisc_v = {}
 
-for i in cv:
-    for pen in penalty:
+for i in tqdm(cv):
+    for pen in tqdm(penalty):
         logist = LogisticRegressionCV(cv=i, solver='saga', max_iter=10000, penalty=pen)
         logist.fit(X_train, Y_train)
         key = "Pen={},CV={}".format(pen,i)
