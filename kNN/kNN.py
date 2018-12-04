@@ -25,10 +25,11 @@ for i in tqdm(range(20)):
     print(i)
     model = KNeighborsClassifier(n_neighbors=(i + 1))
     # Train the model using the training sets
-    model.fit(X_train, y_train)
+    # model.fit(X_train, y_train)
+    model.fit(X_train_transformed, y_train)
 
     #Predict Output
-    predicted= model.predict(X_test)
+    # predicted= model.predict(X_test_transformed)
     # print(predicted)
-    print(model.score(X_test, y_test))
+    print(model.score(X_test_transformed, y_test))
 
