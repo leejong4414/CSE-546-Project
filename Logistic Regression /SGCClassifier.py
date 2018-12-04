@@ -90,6 +90,10 @@ n = 50
 # print(np.mean(squareSGD))
 
 # logistCV = []
+print("Training Start")
+logist = LogisticRegressionCV(cv=2, solver='saga', max_iter=10000, penalty='l1')
+logist.fit(X_train, Y_train)
+print(logist.score(X_test, Y_test))
 
 # plot in terms of cv
 # plot in terms of penalty
