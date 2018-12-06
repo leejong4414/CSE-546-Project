@@ -21,4 +21,11 @@ def partitionData():
 X_train, Y_train, X_test, Y_test = partitionData()
 
 clf = LogisticRegression(penalty='l1').fit(X_train, Y_train)
-print(clf.predict_proba(X_test).shape)
+plt.plot([0,1],[0,1],'k--')
+fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test))
+plt.plot(fpr, tpr)
+plt.xlabel("False positive rate")
+plt.ylabel("True positive rate")
+plt.title("ROC - L1")
+plt.show()
+plt.savefig("./ROC-L1")
