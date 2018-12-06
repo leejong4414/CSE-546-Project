@@ -11,8 +11,8 @@ from matplotlib.colors import ListedColormap
 
 def partitionData():
     print("process train")
-    # X_train = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/train_final.csv", delimiter=",", dtype = float)
-    X_train = np.genfromtxt("./train_processed.csv", delimiter=",", dtype=float)
+    X_train = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/train_processed.csv", delimiter=",", dtype = float)
+    # X_train = np.genfromtxt("./train_processed.csv", delimiter=",", dtype=float)
     # print("process test")
     # X_test = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/test_final.csv", delimiter="," , dtype = float)
     print("finish process")
@@ -67,7 +67,7 @@ for weights in ['uniform', 'distance']:
     plt.ylim(yy.min(), yy.max())
     plt.xlabel('App id')
     plt.ylabel('Device id')
-    plt.title("classification (k = %i, weights = '%s')"
+    plt.title("kNN classification (k = %i, weights = '%s')"
               % (n_neighbors, weights))
 
 plt.savefig("{}.png".format("kNN"))
