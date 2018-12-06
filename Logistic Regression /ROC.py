@@ -21,11 +21,32 @@ def partitionData():
 X_train, Y_train, X_test, Y_test = partitionData()
 
 clf = LogisticRegression(penalty='l1').fit(X_train, Y_train)
+fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test))
 plt.plot([0,1],[0,1],'k--')
-fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
-plt.plot(fpr, tpr)
+
+
+
+
+plt.plot(fpr, tpr, label="Logistic L1")
+clf = LogisticRegression(penalty='l2').fit(X_train, Y_train)
+fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test))
+plt.plot(fpr, tpr, label="Logistic L2")
+
+## FIL IN CODE HERE ##
+## 1. Train your model
+## 2. Call predict_proba(X_test), check the documentations, it should have this method
+## 3. fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test))
+## 4. plot fpr on xaxis, tpr on y-axis and label your plot with the name of your model
+
+
+
+
 plt.xlabel("False positive rate")
 plt.ylabel("True positive rate")
-plt.title("ROC - L1")
+plt.title("ROC.png")
 plt.show()
-plt.savefig("./ROC-L1")
+
+
+
+plt.savefig("./ROC.png")
+
