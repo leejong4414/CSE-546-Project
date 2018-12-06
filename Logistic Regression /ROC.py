@@ -22,7 +22,7 @@ X_train, Y_train, X_test, Y_test = partitionData()
 
 clf = LogisticRegression(penalty='l1').fit(X_train, Y_train)
 plt.plot([0,1],[0,1],'k--')
-fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test))
+fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
 plt.plot(fpr, tpr)
 plt.xlabel("False positive rate")
 plt.ylabel("True positive rate")
