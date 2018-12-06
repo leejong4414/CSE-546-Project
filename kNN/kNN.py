@@ -11,7 +11,7 @@ from matplotlib.colors import ListedColormap
 
 def partitionData():
     print("process train")
-    X_train = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/forgraph.csv", delimiter=",", dtype = float)
+    X_train = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/try.csv", delimiter=",", dtype = float)
     # X_train = np.genfromtxt("./train_processed.csv", delimiter=",", dtype=float)
     # print("process test")
     # X_test = np.genfromtxt("/homes/iws/guohaz/CSE546/Final_Project/test_final.csv", delimiter="," , dtype = float)
@@ -37,7 +37,7 @@ X_train, y_train = partitionData() #, X_test, y_test = partitionData()
 #     # print(predicted)
 #     print(model.score(X_test_transformed, y_test))
 X = X_train[:, :2]
-n_neighbors = 15
+n_neighbors = 8
 h = .02  # step size in the mesh
 # Create color maps
 cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF'])
