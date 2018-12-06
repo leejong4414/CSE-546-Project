@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegressionCV
+from sklearn.neighbors import KNeighborsClassifier
 
 import numpy as np
 np.random.seed(10)
@@ -34,6 +35,14 @@ plt.plot(fpr, tpr, label="Logistic L2")
 ## 3. fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test))
 ## 4. plot fpr on xaxis, tpr on y-axis and label your plot with the name of your model
 
+model = KNeighborsClassifier(n_neighbors=(8))
+model.fit(X_train, Y_train)
+fpr, tpr, threshold = roc_curve(Y_test, model.predict_proba(X_test))
+plt.plot([0,1],[0,1],'k--')
+plt.plot(fpr, tpr, label="kNN k=8")
+
+#Predict Output
+# predicted= model.predict(X_test_transformed)
 
 
 plt.xlabel("False positive rate")
