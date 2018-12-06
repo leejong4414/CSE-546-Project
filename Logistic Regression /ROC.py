@@ -8,11 +8,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegressionCV
-<<<<<<< HEAD
 from sklearn import tree
-=======
 from sklearn.neighbors import KNeighborsClassifier
->>>>>>> 495ed95b9b9a409fe47e56e1521a10b1bb6888b9
 
 import numpy as np
 np.random.seed(10)
