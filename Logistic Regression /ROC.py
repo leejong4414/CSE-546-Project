@@ -1,8 +1,9 @@
+import matplotlib as ml
+ml.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import (RandomTreesEmbedding, RandomForestClassifier,
-                              GradientBoostingClassifier)
+from sklearn.ensemble import (RandomTreesEmbedding, RandomForestClassifier, GradientBoostingClassifier)
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve
