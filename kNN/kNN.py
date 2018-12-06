@@ -5,6 +5,8 @@ from sklearn import neighbors, datasets
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.decomposition import PCA
 from tqdm import tqdm
+import matplotlib as ml
+ml.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 
