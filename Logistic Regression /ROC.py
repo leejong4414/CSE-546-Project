@@ -43,7 +43,7 @@ plt.plot(fpr, tpr, label="Decision Tree")
 
 model = KNeighborsClassifier(n_neighbors=(8))
 model.fit(X_train, Y_train)
-fpr, tpr, threshold = roc_curve(Y_test, model.predict_proba(X_test)[:,1]))
+fpr, tpr, threshold = roc_curve(Y_test, model.predict_proba(X_test)[:,1])
 plt.plot(fpr, tpr, label="kNN k=8")
 
 #Predict Output
