@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegressionCV
+from sklearn import tree
 
 import numpy as np
 np.random.seed(10)
@@ -21,11 +22,11 @@ def partitionData():
 X_train, Y_train, X_test, Y_test = partitionData()
 
 clf = LogisticRegression(penalty='l1').fit(X_train, Y_train)
-fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test))
+fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
 plt.plot([0,1],[0,1],'k--')
 plt.plot(fpr, tpr, label="Logistic L1")
 clf = LogisticRegression(penalty='l2').fit(X_train, Y_train)
-fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test))
+fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
 plt.plot(fpr, tpr, label="Logistic L2")
 
 ## FIL IN CODE HERE ##
@@ -34,10 +35,14 @@ plt.plot(fpr, tpr, label="Logistic L2")
 ## 3. fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test))
 ## 4. plot fpr on xaxis, tpr on y-axis and label your plot with the name of your model
 
+clf = tree.DecisionTreeClassifier(max_depth=25).fit(X_train, Y_train)
+fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
+plt.plot(fpr, tpr, label="Decision Tree")
 
 
 plt.xlabel("False positive rate")
 plt.ylabel("True positive rate")
 plt.title("ROC.png")
+plt.legend()
 plt.show()
 plt.savefig("./ROC.png")

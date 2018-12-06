@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib as ml
 #ml.use('Agg')
 import matplotlib.pyplot as plt
+from sklearn import tree
 
 
 train_acc = [] 
