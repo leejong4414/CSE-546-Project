@@ -23,12 +23,12 @@ def partitionData():
 X_train, Y_train, X_test, Y_test = partitionData()
 
 clf = LogisticRegression(penalty='l1').fit(X_train, Y_train)
-fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
+fprL1, tprL1, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
 plt.plot([0,1],[0,1],'k--')
-plt.plot(fpr, tpr, label="Logistic L1")
+plt.plot(fprL1, tprL1, label="Logistic L1")
 clf = LogisticRegression(penalty='l2').fit(X_train, Y_train)
-fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
-plt.plot(fpr, tpr, label="Logistic L2")
+fprL2, tprL2, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
+plt.plot(fprL2, tprL2, label="Logistic L2")
 
 ## FIL IN CODE HERE ##
 ## 1. Train your model
@@ -37,14 +37,14 @@ plt.plot(fpr, tpr, label="Logistic L2")
 ## 4. plot fpr on xaxis, tpr on y-axis and label your plot with the name of your model
 
 clf = tree.DecisionTreeClassifier(max_depth=25).fit(X_train, Y_train)
-fpr, tpr, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
-plt.plot(fpr, tpr, label="Decision Tree")
+fprD, tprD, threshold = roc_curve(Y_test, clf.predict_proba(X_test)[:,1])
+plt.plot(fprD, tprD, label="Decision Tree")
 
 
 model = KNeighborsClassifier(n_neighbors=(8))
 model.fit(X_train, Y_train)
-fpr, tpr, threshold = roc_curve(Y_test, model.predict_proba(X_test)[:,1])
-plt.plot(fpr, tpr, label="kNN k=8")
+fprK, tprK, threshold = roc_curve(Y_test, model.predict_proba(X_test)[:,1])
+plt.plot(fprK, tprK, label="kNN k=8")
 
 #Predict Output
 # predicted= model.predict(X_test_transformed)
@@ -56,3 +56,13 @@ plt.title("ROC.png")
 plt.legend()
 plt.show()
 plt.savefig("./ROC.png")
+plt.close()
+
+
+plt.xlim(0, 0.2)
+plt.ylim(0.8, 1)
+plt.plot([0, 1], [0, 1], 'k--')
+plt.plot(fprD, tprD, label="Decision Tree")
+plt.plot(fprK, tprK, label="kNN k=8")
+plt.plot(fprL2, tprL2, label="Logistic L2")
+plt.plot(fprL1, tprL1, label="Logistic L1")
