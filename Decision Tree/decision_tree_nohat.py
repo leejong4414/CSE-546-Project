@@ -9,9 +9,10 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 import matplotlib as ml
 
+
 def partitionData():
-    X_train = np.genfromtxt("./../Feature Engineering/train_final.csv", delimiter=",", dtype = float)
-    X_test = np.genfromtxt("./../Feature Engineering/test_final.csv", delimiter=",", dtype = float)
+    X_train = np.genfromtxt("./../KNN/train_final.csv", delimiter=",", dtype = float)
+    X_test = np.genfromtxt("./../KNN/test_final.csv", delimiter=",", dtype = float)
     
     return X_train[1:,:-1], X_train[1:,-1], X_test[1:, :-1], X_test[1:,-1] #X_train, Y_train, X_test, Y_test
 
@@ -42,7 +43,7 @@ for i in tqdm(range(n)):
     train_accuracy.append(clf.score(X_train, y_train)*100)
     accuracy = clf.score(X_validation, y_validation)
     validation_accuracy.append(accuracy*100)
-    tree.export_graphviz(clf, out_file='tree'+ str(i+1) + '.dot')
+    tree.export_graphviz(clf, out_file='tree_nohat'+ str(i+1) + '.dot')
     if accuracy > max_accuracy:
         max_accuracy = accuracy
         finalTree = clf
@@ -62,7 +63,7 @@ print("+++++++++++++++++++++++++++++++++++++++++++++++")
 
 X_train, y_train, X_test, y_test = partitionData()
 
-pca = PCA(n_components = 1000)
+pca = PCA(n_components = 'mle',svd_solver = 'full')
 X_train_transformed = pca.fit_transform(X_train)
 X_test_transformed = pca.transform(X_test)
 train_accuracy_PCA = []
@@ -93,7 +94,7 @@ for i in tqdm(range(n)):
     train_accuracy_PCA.append(clf.score(X_train_transformed, y_train)*100)
     accuracy = clf.score(X_train_transformed_validation, y_validation)
     validation_accuracy_PCA.append(accuracy*100)
-    tree.export_graphviz(clf, out_file='tree_PCA'+ str(i+1) + '.dot')
+    tree.export_graphviz(clf, out_file='tree_PCA_nohat'+ str(i+1) + '.dot')
     if accuracy > max_accuracy_PCA:
         max_accuracy_PCA = accuracy
         finalTree = clf
@@ -112,7 +113,7 @@ print("test error : ", finalTree.score(X_test_transformed, y_test))
 print("+++++++++++++++++++++++++++++++++++++++++++++++")
 
 
-plt.title("Decision Tree accuracy with one hat")
+plt.title("Decision Tree accuracy with out one hat")
 plt.plot(range(1, 51), train_accuracy, label = 'train accuracy without PCA', color = 'aqua')
 plt.plot(range(1, 51), validation_accuracy, label = 'validation accuracy without PCA', color = 'aquamarine')
 
@@ -123,8 +124,7 @@ plt.scatter(min_depth, max_accuracy*100 , label = 'test accuracy witout PCA', co
 plt.scatter(min_depth_PCA, max_accuracy_PCA*100 , label = 'test accuracy with PCA', color = 'brown')
 plt.xlabel('depth of decision tree')
 plt.xlabel('accuracy')
-
 plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
-plt.savefig('Decision_Tree_accuracy_hatted.png',bbox_inches='tight')
+plt.savefig('Decision_Tree_accuracy_not_hatted.png',bbox_inches='tight')
 plt.show()
 plt.close()
