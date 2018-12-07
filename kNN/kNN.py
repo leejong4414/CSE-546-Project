@@ -46,9 +46,9 @@ neighbors = filter(lambda x: x % 2 != 0, myList)
 
 # empty list that will hold cv scores
 # cv_scores = []
-dimension = [10, 50, 100, 250, 500, 750]
-for i in dimension:
-    pca = PCA(n_components = i)
+dimension = [50, 100, 250, 500, 750]
+for i in range(5):
+    pca = PCA(n_components = dimension[i])
     X_train_transformed = pca.fit_transform(X_train)
     X_test_transformed = pca.transform(X_test)
     # perform 10-fold cross validation
