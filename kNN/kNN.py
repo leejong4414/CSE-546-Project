@@ -55,7 +55,7 @@ for i in dimension:
     for k in neighbors:
         knn = KNeighborsClassifier(n_neighbors=k)
         print(i, k)
-        scores = cross_val_score(knn, X_train, y_train, cv=10, scoring='accuracy')
+        scores = cross_val_score(knn, X_train_transformed, y_train, cv=10, scoring='accuracy')
         totalscore = scores.mean()
         print(totalscore)
     # cv_scores.append(totalscore)
