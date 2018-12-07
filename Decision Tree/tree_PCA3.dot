@@ -23,10 +23,10 @@ node [shape=box] ;
 9 -> 10 ;
 11 [label="gini = 0.037\nsamples = 20773\nvalue = [391, 20382]"] ;
 9 -> 11 ;
-12 [label="X[410] <= 0.006\ngini = 0.182\nsamples = 2889\nvalue = [2597, 292]"] ;
+12 [label="X[745] <= -0.0\ngini = 0.182\nsamples = 2889\nvalue = [2597, 292]"] ;
 8 -> 12 ;
-13 [label="gini = 0.171\nsamples = 2862\nvalue = [2592, 270]"] ;
+13 [label="gini = 0.328\nsamples = 29\nvalue = [6, 23]"] ;
 12 -> 13 ;
-14 [label="gini = 0.302\nsamples = 27\nvalue = [5, 22]"] ;
+14 [label="gini = 0.17\nsamples = 2860\nvalue = [2591, 269]"] ;
 12 -> 14 ;
 }
