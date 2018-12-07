@@ -128,5 +128,5 @@ plt.xlabel('accuracy')
 
 plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
 plt.savefig('Decision_Tree_accuracy_hatted.png',bbox_inches='tight')
-plt.show()
+#plt.show()
 plt.close()
