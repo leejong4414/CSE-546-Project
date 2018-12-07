@@ -47,17 +47,6 @@ neighbors = filter(lambda x: x % 2 != 0, myList)
 # empty list that will hold cv scores
 # cv_scores = []
 # dimension = [50, 100, 250, 500, 750]
-pca100 = PCA(n_components = 100)
-X_train_transformed = pca100.fit_transform(X_train)
-X_test_transformed = pca100.transform(X_test)
-# perform 10-fold cross validation
-for k in neighbors:
-    knn = KNeighborsClassifier(n_neighbors=k)
-    print(100, k)
-    scores = cross_val_score(knn, X_train_transformed, y_train, cv=10, scoring='accuracy')
-    totalscore = scores.mean()
-    print(totalscore)
-    # cv_scores.append(totalscore)
 pca250 = PCA(n_components = 250)
 X_train_transformed = pca250.fit_transform(X_train)
 X_test_transformed = pca250.transform(X_test)
@@ -68,6 +57,8 @@ for k in neighbors:
     scores = cross_val_score(knn, X_train_transformed, y_train, cv=10, scoring='accuracy')
     totalscore = scores.mean()
     print(totalscore)
+    # cv_scores.append(totalscore)
+
 
 pca500 = PCA(n_components = 500)
 X_train_transformed = pca500.fit_transform(X_train)
