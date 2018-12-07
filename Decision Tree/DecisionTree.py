@@ -8,6 +8,7 @@ from sklearn.decomposition import PCA
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import matplotlib as ml
+ml.use('Agg')
 
 
 def partitionData():
