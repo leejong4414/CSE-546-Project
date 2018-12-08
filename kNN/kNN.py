@@ -31,18 +31,18 @@ myList = list(range(1, 20))
 # subsetting just the odd ones
 neighbors = filter(lambda x: x % 2 != 0, myList)
 
-for i in neighbors:
-    print(i)
-    model = KNeighborsClassifier(n_neighbors=i)#, weights='distance')
-    # Train the model using the training sets
-    model.fit(X_train, y_train)
-    # model.fit(X_train_transformed, y_train)
+# for i in neighbors:
+print(11)
+model = KNeighborsClassifier(n_neighbors=11, weights='distance')
+# Train the model using the training sets
+model.fit(X_train, y_train)
+# model.fit(X_train_transformed, y_train)
 
-    #Predict Output
-    # predicted= model.predict(X_test)
-    # print(predicted)
-    print(model.score(X_train, y_train))
-    print(model.score(X_test, y_test))
+#Predict Output
+# predicted= model.predict(X_test)
+# print(predicted)
+print(model.score(X_train, y_train))
+print(model.score(X_test, y_test))
 
 # empty list that will hold cv scores
 # cv_scores = []
